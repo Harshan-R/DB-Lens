@@ -1,6 +1,42 @@
 # DB-Lens
 
-**DB-Lens** is a powerful full-stack application designed to seamlessly connect with MySQL databases. It empowers users to generate SQL queries from natural language inputs using advanced large language models (LLMs), execute those queries, and visualize the results in an intuitive chart format.
+**DB-Lens** is a full-stack application designed to connect with MySQL databases. It allows users to generate SQL queries from natural language inputs using large language models (LLMs), execute those queries, and visualize the results in an intuitive chart format.
+
+```bash
+Makes connection to local Database with DB details 
+      ↓
+Schema is fetched and shared with LLM 
+      ↓
+Enter Text Input 
+      ↓
+LLM generates SQL 
+      ↓
+SQL is executed and results are fetched 
+      ↓
+Results are shown as tables and charts 
+      ↓
+If charts are bland (i.e., no sensible charts available)
+      ↓
+Choose "Insights" 
+      ↓
+The fetched data is passed as prompt to LLM 
+      ↓
+LLM analyzes and returns 1 or more useful datasets to make charts 
+      ↓
+Charts are generated
+
+Notes:
+- This Insights step takes time (depends on data volume, LLM model, response speed)
+- LLM returns JSON, but response variations can cause errors
+- If errors → UI shows "No useful Insights available"
+
+To fix/improve:
+→ Update the prompt
+→ Improve parsing logic
+→ Choose consistent LLM model
+
+(All of the above updates should be done in backend/index.js)
+```
 
   
 
