@@ -1,0 +1,265 @@
+/* General Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "San Francisco", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+  background-color: #f4f4f7;
+  color: #333;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  color: #333;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+/* Links */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Buttons */
+button {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 12px 20px;
+  background-color: #007aff;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin: 5px;
+}
+
+button:hover {
+  background-color: #005bb5;
+  transform: scale(1.05);
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.3);
+}
+
+/* Inputs and Textareas */
+input,
+textarea,
+select {
+  font-size: 1rem;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #007aff;
+  outline: none;
+}
+
+/* Layout Root */
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+/* Forms */
+form {
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto 30px auto;
+}
+
+form input,
+form textarea {
+  margin-bottom: 16px;
+}
+
+/* DBConnect */
+.DBConnect-container {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* QueryInput */
+.QueryInput-container {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 700px;
+}
+
+textarea {
+  height: 120px;
+  border-radius: 12px;
+}
+
+.QueryInput-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ResultVisualization */
+.ResultVisualization-container {
+  margin-top: 40px;
+  width: 100%;
+  max-width: 900px;
+}
+
+.ResultVisualization-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.ResultVisualization-container th,
+.ResultVisualization-container td {
+  padding: 12px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+.chart-container {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* View Switch Buttons */
+.view-switch {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Loading */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #007aff;
+  font-size: 1.5rem;
+}
+
+/* Table Styling */
+.table-wrapper {
+  overflow-x: auto;
+  margin-top: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.result-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+  min-width: 600px; /* Allow scroll on small screens */
+}
+
+.result-table th,
+.result-table td {
+  padding: 12px 15px;
+  text-align: center;
+}
+
+.result-table thead {
+  background-color: #007aff;
+  color: white;
+}
+
+.result-table tbody tr:nth-child(even) {
+  background-color: #f2f6ff;
+}
+
+.result-table tbody tr:hover {
+  background-color: #dceaff;
+}
+
+.result-table th {
+  font-weight: 600;
+}
+
+.result-table td {
+  color: #333;
+}
+
+/* Optional — Make long text break cleanly */
+.result-table td {
+  word-break: break-word;
+  white-space: normal;
+}
+
+/* Insights card */
+.insights-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.insight-card {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  text-align: left;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .DBConnect-container,
+  .QueryInput-container,
+  .ResultVisualization-container {
+    width: 100%;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  button {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+}

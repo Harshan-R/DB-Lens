@@ -1,0 +1,129 @@
+// src/components/ResultVisualization.js
+import React, { useState } from "react";
+import ChartComponent from "./ChartComponent";
+
+const ResultVisualization = ({ data }) => {
+  const [view, setView] = useState("table");
+  const [chartType, setChartType] = useState("bar");
+
+  if (!Array.isArray(data) || data.length === 0) {
+    return <div>No valid data to display.</div>;
+  }
+
+  const columns = Object.keys(data[0]);
+
+  // Improved numeric-like detection (number or string that can be parsed as number)
+  const isNumericLike = (value) => {
+    if (value === null || value === undefined) return false;
+    return !isNaN(Number(value));
+  };
+
+  const numericColumns = columns.filter((col) =>
+    data.some((row) => isNumericLike(row[col]))
+  );
+
+  const labelColumn = columns[0]; // Always use first column as label (id/name/date)
+  const valueColumn = numericColumns[0] || columns[1]; // Use numeric column or fallback
+
+  // Prepare chartData only if we have valid valueColumn
+  // const chartData = valueColumn
+  //   ? {
+  //       labels: data.map((item) => item[labelColumn]),
+  //       datasets: [
+  //         {
+  //           label: valueColumn,
+  //           data: data.map((item) => Number(item[valueColumn])), // Ensure number
+  //           backgroundColor: "rgba(75,192,192,0.6)",
+  //           borderColor: "rgba(75,192,192,1)",
+  //           borderWidth: 1,
+  //         },
+  //       ],
+  //     }
+  //   : null;
+
+  // src/components/ResultVisualization.js
+
+  const colors = [
+    "rgba(75,192,192,0.6)",
+    "rgba(255,99,132,0.6)",
+    "rgba(255,206,86,0.6)",
+    "rgba(54,162,235,0.6)",
+    "rgba(153,102,255,0.6)",
+    "rgba(255,159,64,0.6)",
+    "rgba(199,199,199,0.6)",
+  ]; // Add more if needed
+
+  const chartData = valueColumn
+    ? {
+        labels: data.map((item) => item[labelColumn]),
+        datasets: [
+          {
+            label: valueColumn,
+            data: data.map((item) => Number(item[valueColumn])),
+            backgroundColor: data.map((_, i) => colors[i % colors.length]),
+            borderColor: data.map((_, i) =>
+              colors[i % colors.length].replace("0.6", "1")
+            ),
+            borderWidth: 1,
+          },
+        ],
+      }
+    : null;
+
+  return (
+    <div>
+      <h2>Result Visualization</h2>
+
+      <div style={{ marginBottom: "10px" }}>
+        <button onClick={() => setView("table")}>Table View</button>
+        <button
+          onClick={() => setView("chart")}
+          disabled={!chartData} // Disable if no numeric data
+        >
+          Chart View
+        </button>
+        {view === "chart" && chartData && (
+          <select
+            value={chartType}
+            onChange={(e) => setChartType(e.target.value)}
+          >
+            <option value="bar">Bar</option>
+            <option value="line">Line</option>
+            <option value="pie">Pie</option>
+            <option value="radar">Radar</option>
+            <option value="scatter">Scatter</option>
+          </select>
+        )}
+      </div>
+
+      {view === "table" ? (
+        <div className="table-wrapper">
+          <table className="result-table">
+            <thead>
+              <tr>
+                {columns.map((col) => (
+                  <th key={col}>{col}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((row, index) => (
+                <tr key={index}>
+                  {columns.map((col) => (
+                    <td key={col}>{row[col]}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : chartData ? (
+        <ChartComponent chartData={chartData} chartType={chartType} />
+      ) : (
+        <div>No numeric data available for chart visualization.</div>
+      )}
+    </div>
+  );
+};
+
+export default ResultVisualization;
